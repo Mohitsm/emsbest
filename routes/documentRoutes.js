@@ -14,7 +14,7 @@ import {
   viewDocument,
   getDocumentsByAdminId,
   getDocumentStats
-} from "../controllers/DocumentController.js"
+} from "../controllers/documentController.js"
 import { protect, authorize } from "../middlewares/auth.js"
 import { upload, handleUploadError } from "../middlewares/upload.js"
 
