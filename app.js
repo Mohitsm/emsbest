@@ -18,7 +18,7 @@ import attendanceRoutes from "./routes/attendanceRoutes.js";
 import holidayRoutes from "./routes/holidayRoutes.js";
 import leaveRoutes from "./routes/leaveRoutes.js";
 import payrollRoutes from "./routes/payrollRoutes.js";
-import documentRoutes from "./routes/DocumentRoutes.js";
+import documentRoutes from "./routes/documentRoutes.js";
 import authRoutes from "./routes/authRoutes.js";
 import userRoutes from "./routes/userRoutes.js";
 import adminRoutes from "./routes/adminRoutes.js";
