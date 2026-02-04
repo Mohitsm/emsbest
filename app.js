@@ -397,6 +397,7 @@ import advancePaymentRoutes from "./routes/advancePaymentRoutes.js";
 import reimbursementRoutes from './routes/reimbursementRoutes.js';
 import announcementRoutes from './routes/announcementRoutes.js';
 import profileRoutes from './routes/profileRoutes.js';
+import workingHourRoutes from './routes/workingHourRoutes.js';
 
 // Initialize express app
 const app = express();
@@ -533,6 +534,7 @@ app.use("/api/advance-payments", advancePaymentRoutes);
 app.use('/api/reimbursements', reimbursementRoutes);
 app.use('/api/announcements', announcementRoutes);
 app.use('/api/profile', profileRoutes);
+app.use('/api/employee', workingHourRoutes);
 
 /* =========================
    Global Error Handler

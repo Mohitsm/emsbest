@@ -633,6 +633,7 @@ import {
   
   // Admin
   getAllUsersWithProfiles
+  ,getAllUserProfilesByAdmin
 } from '../controllers/profileController.js';
 
 import { protect, authorize } from '../middlewares/auth.js';
@@ -687,5 +688,8 @@ router.route('/skills/:skillId')
 
 // ==================== ADMIN ROUTES ====================
 router.get('/users/all', authorize('admin', 'super_admin'), getAllUsersWithProfiles);
+
+router.get("/admin/user-profiles", protect, getAllUserProfilesByAdmin);
+
 
 export default router;

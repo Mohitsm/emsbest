@@ -365,6 +365,49 @@ userProfileSchema.pre("save", async function () {
     }
   }
 });
+userProfileSchema.statics.getProfilesByAdmin = async function (adminId) {
+  return this.aggregate([
+    {
+      $lookup: {
+        from: "users",
+        localField: "userId",
+        foreignField: "_id",
+        as: "user"
+      }
+    },
+    {
+      $unwind: "$user"
+    },
+    {
+      $match: {
+        "user.createdBy": new mongoose.Types.ObjectId(adminId),
+        "user.role": "user"
+      }
+    },
+    {
+      $project: {
+        _id: 1,
+        phone: 1,
+        position: 1,
+        avatar: 1,
+        bio: 1,
+        education: 1,
+        experience: 1,
+        skills: 1,
+        "user._id": 1,
+        "user.name": 1,
+        "user.email": 1,
+        "user.department": 1,
+        "user.shifts": 1,
+        "user.company": 1
+      }
+    },
+    {
+      $sort: { "user.name": 1 }
+    }
+  ]);
+};
+
 
 const UserProfile = mongoose.model("UserProfile", userProfileSchema);
 export default UserProfile;

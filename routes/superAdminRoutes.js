@@ -18,4 +18,5 @@ router.post('/admins', registerAdmin);
 router.put('/admins/:id/password', updateAdminPassword);
 router.get('/all-users', getAllUsersSuperAdmin);
 
+
 export default router;

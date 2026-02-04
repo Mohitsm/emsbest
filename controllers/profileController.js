@@ -4873,3 +4873,25 @@ export const getAllSkills = async (req, res) => {
     });
   }
 };
+
+export const getAllUserProfilesByAdmin = async (req, res) => {
+  try {
+    const adminId = req.user._id;
+
+    const profiles = await UserProfile.getProfilesByAdmin(adminId);
+
+    res.status(200).json({
+      success: true,
+      count: profiles.length,
+      data: profiles
+    });
+
+  } catch (error) {
+    console.error("Error fetching profiles:", error);
+
+    res.status(500).json({
+      success: false,
+      message: "Server error"
+    });
+  }
+};

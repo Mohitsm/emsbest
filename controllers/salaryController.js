@@ -163,7 +163,7 @@ export const createOrUpdateSalary = async (req, res) => {
 
     // Populate user information
     const populatedSalary = await Salary.findById(salary._id)
-      .populate("userId", "name email employeeId department")
+      .populate("userId", "name email employeeId department company")
       .populate("createdBy", "name email")
       .populate("updatedBy", "name email")
 
@@ -222,7 +222,7 @@ export const getSalary = async (req, res) => {
     }
 
     const salary = await Salary.findOne({ userId })
-      .populate("userId", "name email employeeId department")
+      .populate("userId", "name email employeeId department company")
       .populate("createdBy", "name email")
       .populate("updatedBy", "name email")
 
@@ -286,7 +286,7 @@ export const getAllSalaries = async (req, res) => {
     }
 
     // Get users matching the query
-    const users = await User.find(userQuery).select("_id name email employeeId department")
+    const users = await User.find(userQuery).select("_id name email employeeId department company")
 
     if (users.length === 0) {
       return res.status(200).json({
@@ -318,7 +318,7 @@ export const getAllSalaries = async (req, res) => {
     const salaries = await Salary.find(salaryQuery)
       .populate({
         path: "userId",
-        select: "name email employeeId department",
+        select: "name email employeeId department company",
       })
       .populate("createdBy", "name email")
       .populate("updatedBy", "name email")
@@ -371,7 +371,7 @@ export const getSalaryStats = async (req, res) => {
       company: req.user.company,
       isActive: true,
       role: "user", // ✅ IMPORTANT FIX
-    }).select("_id name department employeeId email")
+    }).select("_id name department employeeId email company")
 
     const employeeIds = employees.map(emp => emp._id)
 
@@ -454,7 +454,7 @@ export const getSalaryStats = async (req, res) => {
       company: req.user.company,
       isActive: true,
       role: "user", // ✅ IMPORTANT FIX
-    }).select("name email employeeId department")
+    }).select("name email employeeId department company")
 
     const totalEmployees = employees.length
     const totalWithSalary = activeSalaries[0]?.count || 0

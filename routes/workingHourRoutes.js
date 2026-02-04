@@ -1,22 +1,9 @@
-import express from "express"
-import {
-  createWorkingHour,
-  getWorkingHours,
-  getDefaultWorkingHour,
-  updateWorkingHour,
-} from "../controllers/workingHourController.js"
-import { protect, authorize } from "../middlewares/auth.js"
+import express from "express";
+import { getUserAdminCounts } from "../controllers/superAdminController.js";
 
-const router = express.Router()
+const router = express.Router();
 
-router.use(protect)
+// No auth / no protection
+router.get("/counts", getUserAdminCounts);
 
-// User routes - get default working hour
-router.get("/default", getDefaultWorkingHour)
-router.get("/", getWorkingHours)
-
-// Admin routes
-router.post("/", authorize("admin", "super_admin"), createWorkingHour)
-router.put("/:id", authorize("admin", "super_admin"), updateWorkingHour)
-
-export default router
+export default router;

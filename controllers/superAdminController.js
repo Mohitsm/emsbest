@@ -181,3 +181,30 @@ export const getAllUsersSuperAdmin = async (req, res) => {
     });
   }
 };
+
+
+
+export const getUserAdminCounts = async (req, res) => {
+  try {
+    const totalUsers = await User.countDocuments({
+      role: "user"
+    });
+
+    const totalAdmins = await User.countDocuments({
+      role: "admin"
+    });
+
+    return res.status(200).json({
+      success: true,
+      totalUsers,
+      totalAdmins
+    });
+  } catch (error) {
+    console.error("Error getting counts:", error);
+    return res.status(500).json({
+      success: false,
+      message: "Failed to fetch user/admin counts"
+    });
+  }
+};
+
